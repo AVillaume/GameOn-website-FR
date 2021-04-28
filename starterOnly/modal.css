@@ -14,7 +14,7 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  background-image: url("background.png");
+  /*background-image: url("background.png");*/
   font-family: var(--font-default);
   font-size: 18px;
   max-width: 1300px;
@@ -208,6 +208,15 @@ input {
   font-size: 20px;
   height: 48px;
 }
+
+.errorInput {
+  border: 5px solid red;
+}
+
+.validInput {
+  border: 5px solid green;
+}
+
 .formData[data-error]::after {
   content: attr(data-error);
   font-size: 0.4em;
