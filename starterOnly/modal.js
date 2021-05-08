@@ -39,7 +39,7 @@ const checkBox2 = document.querySelector("#checkbox2");
 
 const textInput = /^[a-zA-Z]{1,}[^0-9.+*/$%µ!§:;,?={}²&~"#()`@]$/;
 const numberInput = /^[0-9]{1,}/;
-const mailInput = /^([a-zA-Z0-9_\.-]+\@[\da-z\.-]+\.[a-z\.]{2,6})$/;
+const mailInput = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 // launch modal event
 
@@ -56,58 +56,67 @@ function launchModal() {
 closeX.addEventListener("click", function() {
   modalbg.style.display = "none";
 });
+/*
+//Function validate
+
+function validate () {
+  if (first.value != first.value.match(textInput)) {
+    console.log("Veuillez renseigner un prénom valide");
+  } else 
+      if (first.value === "") {
+      console.log("Veuillez renseigner un nom valide");
+    } else 
+        if (last.value != last.value.match(textInput)) {
+        console.log("Veuillez renseigner un nom valide");
+        } else
+            if (email.value != email.value.match(mailInput)) {
+        console.log("Veuillez renseigner une adresse mail valide");
+          } else
+              if (quantity.value != quantity.value.match(numberInput)) {
+              console.log("Veuillez indiquer le nombre de participation");
+            } else
+                if (
+                !loc1.checked &&
+                !loc2.checked &&
+                !loc3.checked &&
+                !loc4.checked &&
+                !loc5.checked &&
+                !loc6.checked
+                ) {
+                console.log("Veuillez selectionner une ville");
+              } else
+                  if (!checkBox1.checked) {
+                  console.log("Vous devez accepter les conditions générales d'utilisation");
+              }
+}
+
 
 // Submit Form
 
-form.addEventListener('submit', (e) => {
+
+form.addEventListener("submit", (e) => {
   e.preventDefault();
-  let erreur;
-  if (first.value != first.value.test(textInput)) {
-    erreur = "Veuillez renseigner un prénom valide";
-    console.log("Veuillez renseigner un prénom valide");
-  } else if (last.value != last.value.test(textInput)) {
-    erreur = "Veuillez renseigner un nom valide";
-    console.log("Veuillez renseigner un nom valide");
-  } else if (email.value != email.value.test(mailInput)) {
-  erreur = "Veuillez renseigner une adresse mail valide";
-  console.log("Veuillez renseigner une adresse mail valide");
-  } else if (quantity.value != quantity.value.test(numberInput)) {
-  erreur = "Veuillez indiquer le nombre de participation";
-  console.log("Veuillez indiquer le nombre de participation");
-  } else if (
-  !loc1.checked &&
-  !loc2.checked &&
-  !loc3.checked &&
-  !loc4.checked &&
-  !loc5.checked &&
-  !loc6.checked
-  ) {
-    erreur = "Veuillez selectionner une ville";
-    console.log("Veuillez selectionner une ville");
-  } else if (!checkBox1.checked) {
-    erreur = "Veuillez acceptez les conditions générales d'utilisation";
-    console.log("Vous devez accepter les conditions générales d'utilisation");
-  }
-    if (
-      first.value &&
-      last.value &&
-      email.value &&
-      birthdate.value &&
-      quantity.value &&
-      loc1.checked ||
-      loc2.checked ||
-      loc3.checked ||
-      loc4.checked ||
-      loc5.checked ||
-      loc6.checked &&
-      checkBox1.checked 
-    ) {
-      alert("SUCCESS");
-    } else {
-      e.preventDefault();
-      formData.innerHTML = erreur;
-      return 0;
-    }
+  
+              if (
+                first.value &&
+                last.value &&
+                email.value &&
+                birthdate.value &&
+                quantity.value &&
+                checkBox1.checked &&
+                loc1.checked ||
+                loc2.checked ||
+                loc3.checked ||
+                loc4.checked ||
+                loc5.checked ||
+                loc6.checked
+              ) {
+                alert("SUCCESS");
+              } else {
+                e.preventDefault();
+                alert("ERROR");
+                return 0;
+              }
 });
 
 
@@ -119,11 +128,9 @@ first.addEventListener("input", function(e) {
   let value = e.target.value;
   if (!textInput.test(value)){
     first.classList.add('errorInput');
-    return false;
   }
   else {
     first.classList.remove('errorInput')
-    return true;
   }
 });
 
@@ -131,11 +138,9 @@ first.addEventListener("keyup", function(e) {
   let value = e.target.value;
   if (textInput.test(value)){
     first.classList.add('validInput');
-    return true;
   }
   else{
     first.classList.remove('validInput');
-    return false;
   }
 });
 
@@ -145,11 +150,9 @@ last.addEventListener("input", function(e) {
   let value = e.target.value;
   if (!textInput.test(value)){
     last.classList.add('errorInput');
-    return false;
   }
   else {
     last.classList.remove('errorInput')
-    return true;
   }
 });
 
@@ -157,11 +160,9 @@ last.addEventListener("keyup", function(e) {
   let value = e.target.value;
   if (textInput.test(value)){
     last.classList.add('validInput');
-    return true;
   }
   else{
     last.classList.remove('validInput');
-    return false;
   }
 });
 
@@ -171,11 +172,9 @@ email.addEventListener("input", function(e) {
   let value = e.target.value;
   if (!mailInput.test(value)){
     email.classList.add('errorInput');
-    return false;
   }
   else {
     email.classList.remove('errorInput')
-    return true;
   }
 });
 
@@ -183,24 +182,21 @@ email.addEventListener("keyup", function(e) {
   let value = e.target.value;
   if (mailInput.test(value)){
     email.classList.add('validInput');
-    return true;
   }
   else{
     email.classList.remove('validInput');
-    return false;
   }
 });
 
 // Quantity
 
-quantity.addEventListener("input", function(e){
+quantity.addEventListener("input", function(e) 
+{
   let value = e.target.value;
   if (!numberInput.test(value)){
     quantity.classList.add('errorInput');
-    return false;
   } else {
     quantity.classList.remove('errorInput');
-    return true;
   }
 });
 
@@ -208,10 +204,10 @@ quantity.addEventListener("keyup", function(e) {
   let value = e.target.value;
   if (numberInput.test(value)){
     quantity.classList.add('validInput');
-    return true;
   }
   else{
     quantity.classList.remove('validInput');
-    return false;
   }
 });
+
+*/

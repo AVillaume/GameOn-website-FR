@@ -57,14 +57,18 @@
           <span class="close"></span>
           <div class="modal-body">
             <form
+              id="form"
               name="reserve"
               action="index.html"
               method="get"
-              onsubmit="return validate();"
+              
             >
+              
               <div
                 class="formData">
                 <label for="first">Prénom</label><br>
+                <div class="errorName">Saisissez au moins 2 caractères !</div>
+                <div class="errorInputName">Prénom incorrect ! Chiffres et caractères spéciaux interdits !</div>
                 <input
                   class="text-control"
                   type="text"
@@ -73,9 +77,12 @@
                   minlength="2"
                 /><br>
               </div>
+
               <div
                 class="formData">
                 <label for="last">Nom</label><br>
+                <div class="errorName">Saisissez au moins 2 caractères !</div>
+                <div class="errorInputName">Nom incorrect ! Chiffres et caractères spéciaux interdits !</div>
                 <input
                   class="text-control"
                   type="text"
@@ -86,16 +93,19 @@
               <div
                 class="formData">
                 <label for="email">E-mail</label><br>
+                <div id="errorMail">Ce champ est obligatoire !</div>
+                <div id="errorInputMail">Vous devez saisir une adresse mail valide !</div>
                 <input
                   class="text-control"
                   type="email"
                   id="email"
                   name="email"
                 /><br>
-              </div>
+              </div>              
               <div
                 class="formData">
                 <label for="birthdate">Date de naissance</label><br>
+                <div id="errorBirth">Veuillez saisir votre date de naissance !</div>
                 <input
                   class="text-control"
                   type="date"
@@ -106,6 +116,7 @@
               <div
                 class="formData">
                 <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
+                <div id="errorQuant">Ce champ est obligatoire !</div>
                 <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99">
               </div>
               <p class="text-label">Quelles villes ?</p>
@@ -178,6 +189,7 @@
                   Portland</label
                 >
               </div>
+              <div id="errorCity">Vous devez saisir au moins une ville !</div>
 
               <div
                 class="formData">
@@ -187,20 +199,23 @@
                   id="checkbox1"
                   checked
                 />
+                
                 <label class="checkbox2-label" for="checkbox1" required>
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
                 </label>
+                <div id="errorCond">Vous devez accepter les conditions d'utilisation !</div>
                 <br>
                 <input class="checkbox-input" 
                 type="checkbox" 
                 id="checkbox2" />
                 <label class="checkbox2-label" for="checkbox2">
                   <span class="checkbox-icon"></span>
-                  Je Je souhaite être prévenu des prochains évènements.
+                  Je souhaite être prévenu des prochains évènements.
                 </label>
                 <br>
               </div>
+              <div class="space">                                </div>
               <input
                 class="btn-submit"
                 type="submit"
@@ -208,6 +223,7 @@
                 value="C'est parti"
               />
             </form>
+            <div class="successInput">Votre réservation a bien été enregistré ! Merci pour votre participation</div>
           </div>
         </div>
       </div>
