@@ -214,7 +214,7 @@ input {
   height: 48px;
 }
 
-.errorName, #errorMail, #errorBirth,
+#errorFirst, #errorLast, #errorMail, #errorBirth,
 #errorQuant, #errorCity, #errorCond {
   display: none;
   color: red;
@@ -225,7 +225,7 @@ input {
   padding-bottom: 0px;
 }
 
-.errorInputName, #errorInputMail{
+#errorInputFirst, #errorInputLast, #errorInputMail{
   display: none;
   color: #f00;
   font-size: 0.6em;
@@ -235,11 +235,12 @@ input {
   font-size: 0.7em;
 } 
 
-.successInput {
+#successInput {
   display: none;
   font-size: 0.8em;
   color: rgb(11, 167, 11);
   margin-top: 10px;
+  z-index: 99999;
 }
 
 .errorInput {

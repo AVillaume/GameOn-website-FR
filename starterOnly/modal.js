@@ -35,6 +35,24 @@ const loc6 = document.querySelector("#location6");
 const checkBox1 = document.querySelector("#checkbox1");
 const checkBox2 = document.querySelector("#checkbox2");
 
+// Form Elements Selector Error
+
+const firstError = document.querySelector("#errorFirst");
+const firstErrorI = document.querySelector('#errorInputFirst');
+const lastError = document.querySelector("#errorLast");
+const lastErrorI = document.querySelector('#errorInputLast');
+const mailError = document.querySelector("#errorMail");
+const mailErrorI = document.querySelector("#errorInputMail");
+const birthError = document.querySelector("#errorBirth");
+const quantError = document.querySelector('#errorQuant');
+const cityError = document.querySelector('#errorCity');
+const cguError = document.querySelector('#errorCond');
+
+// Success Submit
+
+const submitSuccess = document.querySelector("#successInput");
+
+
 //Regex
 
 const textInput = /^[a-zA-Z]{1,}[^0-9.+*/$%µ!§:;,?={}²&~"#()`@]$/;
@@ -56,6 +74,142 @@ function launchModal() {
 closeX.addEventListener("click", function() {
   modalbg.style.display = "none";
 });
+
+//Function Validate Input
+
+let firstValid = function () {
+  if (first.value.length < 2 ) {
+    firstError.style.display = "block";
+    first.classList.add('errorInput');
+    return false;
+  }
+    firstError.style.display = "none";
+    first.classList.remove('errorInput');
+    return true;
+};
+
+let firstErrorInput = function (){
+  if(!first.value.match(textInput)) {
+    firstErrorI.style.display = "block";
+    first.classList.add('errorInput');
+    return false;
+  }
+    firstErrorI.style.display = "none";
+    first.classList.remove('errorInput');
+    return true;
+}
+
+function lastValid() {
+  if (last.value.length < 2 ) {
+    lastError.style.display = "block";
+    last.classList.add('errorInput');
+    return false;
+  }
+    lastError.style.display = "none";
+    last.classList.remove('errorInput');
+    return true;
+};
+
+function lastErrorInput() {
+  if(!last.value.match(textInput)) {
+    lastErrorI.style.display = "block";
+    last.classList.add('errorInput');
+    return false;
+  }
+    lastErrorI.style.display = "none";
+    last.classList.remove('errorInput');
+    return true;
+}
+
+function emailValid() {
+  if (email.value.length === 0) {
+    mailError.style.display = "block";
+    email.classList.add("errorInput");
+    return false;
+  }
+    mailError.style.display = "none";
+    return true;
+}
+
+function mailErrorInput(){
+  if(!email.value.match(mailInput)) {
+    mailErrorI.style.display = "block";
+    email.classList.add('errorInput');
+    return false;
+  }
+    mailErrorI.style.display = "none";
+    email.classList.remove('errorInput');
+    return true;
+}
+
+function birthValid () {
+  if (birthdate.value === "") {
+    birthError.style.display = "block";
+    birthdate.classList.add("errorInput");
+    return false;
+  }
+    birthError.style.display = "none";
+    birthdate.classList.remove('errorInput');
+    return true;
+}
+
+function quantValid () {
+  if (quantity.value === "") {
+    quantError.style.display = "block";
+    quantity.classList.add("errorInput");
+    return false;
+  }
+    quantError.style.display = "none";
+    quantity.classList.remove('errorInput');
+    return true;
+}
+
+function cityValid () {
+  if ((!loc1.checked &&
+  !loc2.checked &&
+  !loc3.checked &&
+  !loc4.checked &&
+  !loc5.checked &&
+  !loc6.checked) && ((quantity.value != "0"))) {
+    cityError.style.display = "block";
+    return false;
+  }
+    cityError.style.display = "none";
+    return true;
+}
+
+function cguValid () {
+  if (!checkBox1.checked) {
+    cguError.style.display = "block";
+    return false
+  }
+    cguError.style.display = "none";
+    return true;
+}
+
+
+form.addEventListener("submit", (e) => {
+  if (
+  firstValid() &&
+  firstErrorInput() &&
+  lastValid() &&
+  lastErrorInput() &&
+  emailValid() &&
+  mailErrorInput() &&
+  birthValid() &&
+  quantValid() &&
+  cityValid() &&
+  cguValid()
+  ){
+    e.preventDefault();
+    submitSuccess.style.display = "block";
+    return true
+  }
+    e.preventDefault();
+    submitSuccess.style.display ="none";
+    return false;
+});
+
 /*
 //Function validate
 
