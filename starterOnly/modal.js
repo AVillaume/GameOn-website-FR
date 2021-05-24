@@ -198,16 +198,22 @@ form.addEventListener("submit", (e) => {
   
   }); */ 
 
-  function validate(){
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
     let datas = new FormData (form);
   for(let i of datas.entries()) {
     console.log(i[0], "..", i[1]); 
   }
     console.log("Envoyé");
     formValid = true;
-    if (!checkBox1.checked) {
+    submitSuccess.style.display = "block";
+
+    if (!cguValid()) {
       cguError.style.display = "block";
-      formValid=false; 
+      submitSuccess.style.display = "none";
+    } else {
+      cguError.style.display = "none";
     }
     if ((!loc1.checked &&
       !loc2.checked &&
@@ -216,40 +222,46 @@ form.addEventListener("submit", (e) => {
       !loc5.checked &&
       !loc6.checked) && ((quantity.value != "0"))) {
         cityError.style.display = "block";
+        submitSuccess.style.display = "none";
       } else { cityError.style.display='none';
     }
     if (!quantValid()){
         quantError.style.display = "block";
         quantity.classList.add("errorInput");
-    }else {
+        submitSuccess.style.display = "none";
+    } else {
         quantError.style.display = "none";
         quantity.classList.remove("errorInput");
     }
     if (!birthValid()){
       birthError.style.display = "block";
       birthdate.classList.add("errorInput");
-    }else {
+      submitSuccess.style.display = "none";
+    } else {
       birthError.style.display = "none";
       birthdate.classList.remove("errorInput");
     }
     if (!firstValid()) {
       firstError.style.display = "block";
       first.classList.add('errorInput');
-    }else{
+      submitSuccess.style.display = "none";
+    } else{
         firstError.style.display = "none";
         first.classList.remove('errorInput');
     }
     if (!lastValid()) {
       lastError.style.display = "block";
       last.classList.add('errorInput');
-    }else{
+      submitSuccess.style.display = "none";
+    } else {
       lastError.style.display = "none";
       last.classList.remove('errorInput');
     }
     if (!emailValid()) {
       mailError.style.display = "block";
       email.classList.add('errorInput');
-    }else{
+      submitSuccess.style.display = "none";
+    } else {
       mailError.style.display = "none";
       email.classList.remove('errorInput');
     }
@@ -266,7 +278,7 @@ form.addEventListener("submit", (e) => {
     console.log("envoyé"+ " " +formValid);
     return formValid; // return true as formValid=true
 
-    }
+    });
 
   
   /*
