@@ -1,3 +1,6 @@
+let textInputB = false; let mailInputB = false; let birthInputB = false; 
+let quantInputB = false; let cityB = false; let cguB = false;
+
 const menuBurger = document.querySelector(".icon");
 
 menuBurger.addEventListener("click", function(editNav) {
@@ -47,6 +50,7 @@ const birthError = document.querySelector("#errorBirth");
 const quantError = document.querySelector('#errorQuant');
 const cityError = document.querySelector('#errorCity');
 const cguError = document.querySelector('#errorCond');
+const textError = document.querySelector('.errorText');
 
 // Success Submit
 
@@ -57,7 +61,7 @@ const submitSuccess = document.querySelector("#successInput");
 
 const textInput = /^[a-zA-Z]{1,}[^0-9.+*/$%µ!§:;,?={}²&~"#()`@]$/;
 const numberInput = /^[0-9]{1,}/;
-const mailInput = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const mailInput = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 // launch modal event
 
@@ -75,10 +79,12 @@ closeX.addEventListener("click", function() {
   modalbg.style.display = "none";
 });
 
-//Function Validate Input
 
+
+
+//Function Validate Input
 let firstValid = function () {
-  if (first.value.length < 2 ) {
+  if ((first.value.length < 2 ) || (!first.value.match(textInput))) {
     firstError.style.display = "block";
     first.classList.add('errorInput');
     return false;
@@ -86,21 +92,11 @@ let firstValid = function () {
     firstError.style.display = "none";
     first.classList.remove('errorInput');
     return true;
+  
 };
 
-let firstErrorInput = function (){
-  if(!first.value.match(textInput)) {
-    firstErrorI.style.display = "block";
-    first.classList.add('errorInput');
-    return false;
-  }
-    firstErrorI.style.display = "none";
-    first.classList.remove('errorInput');
-    return true;
-}
-
 function lastValid() {
-  if (last.value.length < 2 ) {
+  if ((last.value.length < 2 ) || (!last.value.match(textInput))) {
     lastError.style.display = "block";
     last.classList.add('errorInput');
     return false;
@@ -108,39 +104,20 @@ function lastValid() {
     lastError.style.display = "none";
     last.classList.remove('errorInput');
     return true;
+  
 };
 
-function lastErrorInput() {
-  if(!last.value.match(textInput)) {
-    lastErrorI.style.display = "block";
-    last.classList.add('errorInput');
-    return false;
-  }
-    lastErrorI.style.display = "none";
-    last.classList.remove('errorInput');
-    return true;
-}
-
 function emailValid() {
-  if (email.value.length === 0) {
+  if ((email.value.length === 0) || (!email.value.match(mailInput))) {
     mailError.style.display = "block";
     email.classList.add("errorInput");
     return false;
   }
+  
     mailError.style.display = "none";
     return true;
-}
-
-function mailErrorInput(){
-  if(!email.value.match(mailInput)) {
-    mailErrorI.style.display = "block";
-    email.classList.add('errorInput');
-    return false;
-  }
-    mailErrorI.style.display = "none";
-    email.classList.remove('errorInput');
-    return true;
-}
+  
+};
 
 function birthValid () {
   if (birthdate.value === "") {
@@ -151,7 +128,8 @@ function birthValid () {
     birthError.style.display = "none";
     birthdate.classList.remove('errorInput');
     return true;
-}
+  
+};
 
 function quantValid () {
   if (quantity.value === "") {
@@ -162,8 +140,8 @@ function quantValid () {
     quantError.style.display = "none";
     quantity.classList.remove('errorInput');
     return true;
-}
-
+  
+};
 function cityValid () {
   if ((!loc1.checked &&
   !loc2.checked &&
@@ -173,36 +151,142 @@ function cityValid () {
   !loc6.checked) && ((quantity.value != "0"))) {
     cityError.style.display = "block";
     return false;
-  }
+  } else {
+  
     cityError.style.display = "none";
     return true;
-}
+ }
+};
 
 function cguValid () {
   if (!checkBox1.checked) {
     cguError.style.display = "block";
-    return false
-  }
+    return false;
+  } else {
     cguError.style.display = "none";
     return true;
-}
+  }
+};
 
+
+/*let datas = new FormData (form);
+  for(let i of datas.entries()) {
+    console.log(i[0], "..", i[1]); 
+  }*/
+/*
 
 form.addEventListener("submit", (e) => {
-  if (
-  firstValid() &&
-  firstErrorInput() &&
-  lastValid() &&
-  lastErrorInput() &&
-  emailValid() &&
-  mailErrorInput() &&
-  birthValid() &&
-  quantValid() &&
-  cityValid() &&
-  cguValid()
-  ){
-    e.preventDefault();
+  e.preventDefault();
+    if ((firstValid()) ||
+       (lastValid()) ||
+      (emailValid()) ||
+      (birthValid()) ||
+      (quantValid()) ||
+      (cityValid()) ||
+      (cguValid())==true)
+      {
+        formValid=true;
+        submitSuccess.style.display = "block";
+        console.log("Envoyé");
+      }
+    
+    else {
+        formValid=false;
+        submitSuccess.style.display = "none";
+        
+    }
+  
+  }); */ 
+
+  function validate(){
+    let datas = new FormData (form);
+  for(let i of datas.entries()) {
+    console.log(i[0], "..", i[1]); 
+  }
+    console.log("Envoyé");
+    formValid = true;
+    if (!checkBox1.checked) {
+      cguError.style.display = "block";
+      formValid=false; 
+    }
+    if ((!loc1.checked &&
+      !loc2.checked &&
+      !loc3.checked &&
+      !loc4.checked &&
+      !loc5.checked &&
+      !loc6.checked) && ((quantity.value != "0"))) {
+        cityError.style.display = "block";
+      } else { cityError.style.display='none';
+    }
+    if (!quantValid()){
+        quantError.style.display = "block";
+        quantity.classList.add("errorInput");
+    }else {
+        quantError.style.display = "none";
+        quantity.classList.remove("errorInput");
+    }
+    if (!birthValid()){
+      birthError.style.display = "block";
+      birthdate.classList.add("errorInput");
+    }else {
+      birthError.style.display = "none";
+      birthdate.classList.remove("errorInput");
+    }
+    if (!firstValid()) {
+      firstError.style.display = "block";
+      first.classList.add('errorInput');
+    }else{
+        firstError.style.display = "none";
+        first.classList.remove('errorInput');
+    }
+    if (!lastValid()) {
+      lastError.style.display = "block";
+      last.classList.add('errorInput');
+    }else{
+      lastError.style.display = "none";
+      last.classList.remove('errorInput');
+    }
+    if (!emailValid()) {
+      mailError.style.display = "block";
+      email.classList.add('errorInput');
+    }else{
+      mailError.style.display = "none";
+      email.classList.remove('errorInput');
+    }
+    
+    formValid=(formValid && firstValid());
+    console.log("firstName" + " " + formValid);
+    formValid=(formValid && lastValid());
+    console.log("lasttName" + " " + formValid);
+    formValid=(formValid && emailValid()); 
+    console.log("email" + " " + formValid);
+    formValid=(formValid && birthValid()); 
+    console.log("birthdate" + " " + formValid);
+    formValid=(formValid && cityValid());
+    console.log("envoyé"+ " " +formValid);
+    return formValid; // return true as formValid=true
+
+    }
+
+  
+  /*
+  if ((firstValid == true) &&
+  (lastValid == true) &&
+  (emailValid == true) &&
+  (birthValid == true) &&
+  (quantValid == true) &&
+  (cityValid == true) &&
+  (cguValid == true)) {
     submitSuccess.style.display = "block";
+    return true;
+  }
+  else {
+    return false;
+  }
+});
+
+
+/*    submitSuccess.style.display = "block";
     return true
   }
     e.preventDefault();
@@ -210,7 +294,7 @@ form.addEventListener("submit", (e) => {
     return false;
 });
 
-/*
+
 //Function validate
 
 function validate () {
@@ -223,7 +307,7 @@ function validate () {
         if (last.value != last.value.match(textInput)) {
         console.log("Veuillez renseigner un nom valide");
         } else
-            if (email.value != email.value.match(mailInput)) {
+            if(!email.value.match(mailInput)) {
         console.log("Veuillez renseigner une adresse mail valide");
           } else
               if (quantity.value != quantity.value.match(numberInput)) {
@@ -362,6 +446,4 @@ quantity.addEventListener("keyup", function(e) {
   else{
     quantity.classList.remove('validInput');
   }
-});
-
-*/
+});*/
