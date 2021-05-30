@@ -38,16 +38,12 @@ const checkBox2 = document.querySelector("#checkbox2");
 // Form Elements Selector Error
 
 const firstError = document.querySelector("#errorFirst");
-const firstErrorI = document.querySelector('#errorInputFirst');
 const lastError = document.querySelector("#errorLast");
-const lastErrorI = document.querySelector('#errorInputLast');
 const mailError = document.querySelector("#errorMail");
-const mailErrorI = document.querySelector("#errorInputMail");
 const birthError = document.querySelector("#errorBirth");
 const quantError = document.querySelector('#errorQuant');
 const cityError = document.querySelector('#errorCity');
 const cguError = document.querySelector('#errorCond');
-const textError = document.querySelector('.errorText');
 
 // Success Submit
 
