@@ -76,122 +76,122 @@ closeX.addEventListener("click", function() {
 
 
 //Function Validate Input
-let firstValid = function () {
-  if ((first.value.length < 2 ) || (!first.value.match(textInput))) {
-    firstError.style.display = "block";
-    first.classList.add('errorInput');
+let firstValid = function () { //first name validation function
+  if ((first.value.length < 2 ) || (!first.value.match(textInput))) { // if the entry is less than 2 or not validated by the Regex
+    firstError.style.display = "block"; // Show Error Message
+    first.classList.add('errorInput');  // Add a red frame
     return false;
   }
-    firstError.style.display = "none";
-    first.classList.remove('errorInput');
+    firstError.style.display = "none"; // Hide Error Message
+    first.classList.remove('errorInput'); // Remove the red frame
     return true;
   
-};
+}
 
-function lastValid() {
-  if ((last.value.length < 2 ) || (!last.value.match(textInput))) {
-    lastError.style.display = "block";
-    last.classList.add('errorInput');
+function lastValid() { // last name validation function
+  if ((last.value.length < 2 ) || (!last.value.match(textInput))) { // if the entry is less than 2 or not validated by the Regex
+    lastError.style.display = "block"; // Show Error Message
+    last.classList.add('errorInput'); // Add a red frame
     return false;
   }
-    lastError.style.display = "none";
-    last.classList.remove('errorInput');
+    lastError.style.display = "none"; // Hide Error Message
+    last.classList.remove('errorInput'); // Remove the red frame
     return true;
   
-};
+}
 
-function emailValid() {
-  if ((email.value.length === 0) || (!email.value.match(mailInput))) {
-    mailError.style.display = "block";
-    email.classList.add("errorInput");
+function emailValid() { // email validation function
+  if ((email.value.length === 0) || (!email.value.match(mailInput))) { // if the entry is empty or the characters
+    mailError.style.display = "block"; // Show Error Message
+    email.classList.add("errorInput"); // Add a red frame
     return false;
   }
-  
-    mailError.style.display = "none";
+    mailError.style.display = "none"; // Hide Error Message
+    email.classList.remove("errorInput"); // Remove the red frame
     return true;
   
-};
+}
 
-function birthValid () {
-  if (birthdate.value === "") {
-    birthError.style.display = "block";
-    birthdate.classList.add("errorInput");
+function birthValid () { //birthdate validation function
+  if (birthdate.value === "") { // if isn't filled in
+    birthError.style.display = "block"; // Show Error Message
+    birthdate.classList.add("errorInput"); // Add a red frame
     return false;
   }
-    birthError.style.display = "none";
-    birthdate.classList.remove('errorInput');
+    birthError.style.display = "none"; // Hide Error Message
+    birthdate.classList.remove('errorInput'); // Remove the red frame
     return true;
   
-};
+}
 
-function quantValid () {
-  if (quantity.value === "") {
-    quantError.style.display = "block";
-    quantity.classList.add("errorInput");
+function quantValid () { //number of participation validation function
+  if (quantity.value === "") { // if isn't filled in
+    quantError.style.display = "block"; // Show Error Message
+    quantity.classList.add("errorInput"); // Add a red frame
     return false;
   }
-    quantError.style.display = "none";
-    quantity.classList.remove('errorInput');
+    quantError.style.display = "none"; // Hide Error Message
+    quantity.classList.remove('errorInput'); // Remove the red frame
     return true;
   
-};
-function cityValid () {
+}
+function cityValid () { // city checkbox validation function
   if ((!loc1.checked &&
   !loc2.checked &&
   !loc3.checked &&
   !loc4.checked &&
   !loc5.checked &&
-  !loc6.checked)) {
-    cityError.style.display = "block";
+  !loc6.checked)) {  //if no box is checked
+    cityError.style.display = "block"; // Show Error Message
     return false;
   } else {
   
-    cityError.style.display = "none";
+    cityError.style.display = "none"; // Hide Error Message
     return true;
  }
-};
+}
 
-function cguValid () {
-  if (!checkBox1.checked) {
-    cguError.style.display = "block";
+function cguValid () { // cgu checkbox validation function
+  if (!checkBox1.checked) { //if isn't checked
+    cguError.style.display = "block"; // Show Error Message
     return false;
   } else {
-    cguError.style.display = "none";
+    cguError.style.display = "none"; // Hide Error Message
     return true;
   }
 };
 
-
-form.addEventListener("submit", (e) => {
+// Form Submit
+form.addEventListener("submit", (e) => { 
     e.preventDefault();
     let datas = new FormData (form);
   for(let i of datas.entries()) {
-    console.log(i[0], "..", i[1]); 
+    console.log(i[0], "..", i[1]); // get all entries
   }
     console.log("Envoyé");
     formValid = true;
-    submitSuccess.style.display = "block";
+    submitSuccess.style.display = "block"; // Show the success message
 
     if (!cguValid()) {
-      submitSuccess.style.display = "none";
+      submitSuccess.style.display = "none"; // Hide the success message
     }
     if (!cityValid()) {
-        submitSuccess.style.display = "none";
+        submitSuccess.style.display = "none"; // Hide the success message
     }
     if (!quantValid()){
-        submitSuccess.style.display = "none";
+        submitSuccess.style.display = "none"; // Hide the success message
     }
     if (!birthValid()){
-      submitSuccess.style.display = "none";
+      submitSuccess.style.display = "none"; // Hide the success message
     }
     if (!firstValid()) {
-      submitSuccess.style.display = "none";
+      submitSuccess.style.display = "none"; // Hide the success message
     }
     if (!lastValid()) {
-      submitSuccess.style.display = "none";
+      submitSuccess.style.display = "none"; // Hide the success message
     }
     if (!emailValid()) {
-      submitSuccess.style.display = "none";
+      submitSuccess.style.display = "none"; // Hide the success message
     }
     
     formValid=(formValid && firstValid());
@@ -202,7 +202,7 @@ form.addEventListener("submit", (e) => {
     console.log("email" + " " + formValid);
     formValid=(formValid && birthValid()); 
     console.log("birthdate" + " " + formValid);
-    formValid=(formValid && cityValid());
+    formValid=(formValid && cityValid()); //form is valid if all verifications are valid
     console.log("envoyé"+ " " +formValid);
     return formValid; // return true as formValid=true
 
