@@ -1,6 +1,3 @@
-let textInputB = false; let mailInputB = false; let birthInputB = false; 
-let quantInputB = false; let cityB = false; let cguB = false;
-
 const menuBurger = document.querySelector(".icon");
 
 menuBurger.addEventListener("click", function(editNav) {
@@ -148,7 +145,7 @@ function cityValid () {
   !loc3.checked &&
   !loc4.checked &&
   !loc5.checked &&
-  !loc6.checked) && ((quantity.value != "0"))) {
+  !loc6.checked)) {
     cityError.style.display = "block";
     return false;
   } else {
@@ -169,36 +166,6 @@ function cguValid () {
 };
 
 
-/*let datas = new FormData (form);
-  for(let i of datas.entries()) {
-    console.log(i[0], "..", i[1]); 
-  }*/
-/*
-
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-    if ((firstValid()) ||
-       (lastValid()) ||
-      (emailValid()) ||
-      (birthValid()) ||
-      (quantValid()) ||
-      (cityValid()) ||
-      (cguValid())==true)
-      {
-        formValid=true;
-        submitSuccess.style.display = "block";
-        console.log("Envoyé");
-      }
-    
-    else {
-        formValid=false;
-        submitSuccess.style.display = "none";
-        
-    }
-  
-  }); */ 
-
-
 form.addEventListener("submit", (e) => {
     e.preventDefault();
     let datas = new FormData (form);
@@ -210,60 +177,25 @@ form.addEventListener("submit", (e) => {
     submitSuccess.style.display = "block";
 
     if (!cguValid()) {
-      cguError.style.display = "block";
       submitSuccess.style.display = "none";
-    } else {
-      cguError.style.display = "none";
     }
-    if ((!loc1.checked &&
-      !loc2.checked &&
-      !loc3.checked &&
-      !loc4.checked &&
-      !loc5.checked &&
-      !loc6.checked) && ((quantity.value != "0"))) {
-        cityError.style.display = "block";
+    if (!cityValid()) {
         submitSuccess.style.display = "none";
-      } else { cityError.style.display='none';
     }
     if (!quantValid()){
-        quantError.style.display = "block";
-        quantity.classList.add("errorInput");
         submitSuccess.style.display = "none";
-    } else {
-        quantError.style.display = "none";
-        quantity.classList.remove("errorInput");
     }
     if (!birthValid()){
-      birthError.style.display = "block";
-      birthdate.classList.add("errorInput");
       submitSuccess.style.display = "none";
-    } else {
-      birthError.style.display = "none";
-      birthdate.classList.remove("errorInput");
     }
     if (!firstValid()) {
-      firstError.style.display = "block";
-      first.classList.add('errorInput');
       submitSuccess.style.display = "none";
-    } else{
-        firstError.style.display = "none";
-        first.classList.remove('errorInput');
     }
     if (!lastValid()) {
-      lastError.style.display = "block";
-      last.classList.add('errorInput');
       submitSuccess.style.display = "none";
-    } else {
-      lastError.style.display = "none";
-      last.classList.remove('errorInput');
     }
     if (!emailValid()) {
-      mailError.style.display = "block";
-      email.classList.add('errorInput');
       submitSuccess.style.display = "none";
-    } else {
-      mailError.style.display = "none";
-      email.classList.remove('errorInput');
     }
     
     formValid=(formValid && firstValid());
@@ -279,183 +211,3 @@ form.addEventListener("submit", (e) => {
     return formValid; // return true as formValid=true
 
     });
-
-  
-  /*
-  if ((firstValid == true) &&
-  (lastValid == true) &&
-  (emailValid == true) &&
-  (birthValid == true) &&
-  (quantValid == true) &&
-  (cityValid == true) &&
-  (cguValid == true)) {
-    submitSuccess.style.display = "block";
-    return true;
-  }
-  else {
-    return false;
-  }
-});
-
-
-/*    submitSuccess.style.display = "block";
-    return true
-  }
-    e.preventDefault();
-    submitSuccess.style.display ="none";
-    return false;
-});
-
-
-//Function validate
-
-function validate () {
-  if (first.value != first.value.match(textInput)) {
-    console.log("Veuillez renseigner un prénom valide");
-  } else 
-      if (first.value === "") {
-      console.log("Veuillez renseigner un nom valide");
-    } else 
-        if (last.value != last.value.match(textInput)) {
-        console.log("Veuillez renseigner un nom valide");
-        } else
-            if(!email.value.match(mailInput)) {
-        console.log("Veuillez renseigner une adresse mail valide");
-          } else
-              if (quantity.value != quantity.value.match(numberInput)) {
-              console.log("Veuillez indiquer le nombre de participation");
-            } else
-                if (
-                !loc1.checked &&
-                !loc2.checked &&
-                !loc3.checked &&
-                !loc4.checked &&
-                !loc5.checked &&
-                !loc6.checked
-                ) {
-                console.log("Veuillez selectionner une ville");
-              } else
-                  if (!checkBox1.checked) {
-                  console.log("Vous devez accepter les conditions générales d'utilisation");
-              }
-}
-
-
-// Submit Form
-
-
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  
-              if (
-                first.value &&
-                last.value &&
-                email.value &&
-                birthdate.value &&
-                quantity.value &&
-                checkBox1.checked &&
-                loc1.checked ||
-                loc2.checked ||
-                loc3.checked ||
-                loc4.checked ||
-                loc5.checked ||
-                loc6.checked
-              ) {
-                alert("SUCCESS");
-              } else {
-                e.preventDefault();
-                alert("ERROR");
-                return 0;
-              }
-});
-
-
-// Form Validation
-//
-// First Name
-
-first.addEventListener("input", function(e) {
-  let value = e.target.value;
-  if (!textInput.test(value)){
-    first.classList.add('errorInput');
-  }
-  else {
-    first.classList.remove('errorInput')
-  }
-});
-
-first.addEventListener("keyup", function(e) {
-  let value = e.target.value;
-  if (textInput.test(value)){
-    first.classList.add('validInput');
-  }
-  else{
-    first.classList.remove('validInput');
-  }
-});
-
-// Last Name
-
-last.addEventListener("input", function(e) {
-  let value = e.target.value;
-  if (!textInput.test(value)){
-    last.classList.add('errorInput');
-  }
-  else {
-    last.classList.remove('errorInput')
-  }
-});
-
-last.addEventListener("keyup", function(e) {
-  let value = e.target.value;
-  if (textInput.test(value)){
-    last.classList.add('validInput');
-  }
-  else{
-    last.classList.remove('validInput');
-  }
-});
-
-// Email
-
-email.addEventListener("input", function(e) {
-  let value = e.target.value;
-  if (!mailInput.test(value)){
-    email.classList.add('errorInput');
-  }
-  else {
-    email.classList.remove('errorInput')
-  }
-});
-
-email.addEventListener("keyup", function(e) {
-  let value = e.target.value;
-  if (mailInput.test(value)){
-    email.classList.add('validInput');
-  }
-  else{
-    email.classList.remove('validInput');
-  }
-});
-
-// Quantity
-
-quantity.addEventListener("input", function(e) 
-{
-  let value = e.target.value;
-  if (!numberInput.test(value)){
-    quantity.classList.add('errorInput');
-  } else {
-    quantity.classList.remove('errorInput');
-  }
-});
-
-quantity.addEventListener("keyup", function(e) {
-  let value = e.target.value;
-  if (numberInput.test(value)){
-    quantity.classList.add('validInput');
-  }
-  else{
-    quantity.classList.remove('validInput');
-  }
-});*/
