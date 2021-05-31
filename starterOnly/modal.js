@@ -16,6 +16,8 @@ const modalBtn = document.querySelectorAll(".modal-btn");
 const form = document.querySelector("#form");
 const formData = document.querySelectorAll(".formData");
 const closeX = document.querySelector(".close");
+const formSent = document.querySelector(".form__sent");
+const closeBtn = document.querySelector(".btn-close");
 
 // Form Elements Selector
 
@@ -54,7 +56,7 @@ const submitSuccess = document.querySelector("#successInput");
 
 const textInput = /^[a-zA-Z]{1,}[^0-9.+*/$%µ!§:;,?={}²&~"#()`@]$/;
 const numberInput = /^[0-9]{1,}/;
-const mailInput = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+const mailInput = /^([a-zA-Z0-9_\.-]+\@[\da-z\.-]+\.[a-z\.]{2,6})$/;
 
 // launch modal event
 
@@ -72,6 +74,12 @@ closeX.addEventListener("click", function() {
   modalbg.style.display = "none";
 });
 
+
+//Close the confirmation message
+
+closeBtn.addEventListener("click", function() {
+  formSent.style.display = "none";
+});
 
 
 
@@ -170,28 +178,28 @@ form.addEventListener("submit", (e) => {
   }
     console.log("Envoyé");
     formValid = true;
-    submitSuccess.style.display = "block"; // Show the success message
+    formSent.style.display = "block"; // Show the success message
 
     if (!cguValid()) {
-      submitSuccess.style.display = "none"; // Hide the success message
+      formSent.style.display = "none"; // Hide the success message
     }
     if (!cityValid()) {
-        submitSuccess.style.display = "none"; // Hide the success message
+      formSent.style.display = "none"; // Hide the success message
     }
     if (!quantValid()){
-        submitSuccess.style.display = "none"; // Hide the success message
+      formSent.style.display = "none"; // Hide the success message
     }
     if (!birthValid()){
-      submitSuccess.style.display = "none"; // Hide the success message
+      formSent.style.display = "none"; // Hide the success message
     }
     if (!firstValid()) {
-      submitSuccess.style.display = "none"; // Hide the success message
+      formSent.style.display = "none"; // Hide the success message
     }
     if (!lastValid()) {
-      submitSuccess.style.display = "none"; // Hide the success message
+      formSent.style.display = "none"; // Hide the success message
     }
     if (!emailValid()) {
-      submitSuccess.style.display = "none"; // Hide the success message
+      formSent.style.display = "none"; // Hide the success message
     }
     
     formValid=(formValid && firstValid());
